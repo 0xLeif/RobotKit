@@ -14,45 +14,58 @@ public actor RobotNotification: SelfTasking {
     private class DefaultNotificationCenterDelegate: NSObject, UNUserNotificationCenterDelegate { }
     
     private var current: UNUserNotificationCenter = UNUserNotificationCenter.current()
+    
     public var delegate: UNUserNotificationCenterDelegate = DefaultNotificationCenterDelegate() {
         didSet {
             current.delegate = delegate
         }
     }
     
-    public var isAuthorized: Bool {
-        let settings = await current.notificationSettings()
-        
-        return settings.authorizationStatus == .authorized
-    }
-    
     init() {
         current.delegate = delegate
     }
     
+    /// Request notification permission from user if needed
+    @discardableResult
+    public func requestAuthorizationIfNeeded(options: UNAuthorizationOptions = [.alert, .sound]) async -> Bool {
+        guard await getAuthorizationStatus() != .authorized else {
+            return await requestAuthorization(options: options)
+        }
+        
+        return true
+    }
+    
     /// Request notification permission from user
     @discardableResult
-    public func requestAuthorization(options: UNAuthorizationOptions = [.alert, .sound]) async throws -> Bool {
-        return current.requestAuthorization(options: options)
+    public func requestAuthorization(options: UNAuthorizationOptions = [.alert, .sound]) async -> Bool {
+        do {
+            return try await current.requestAuthorization(options: options)
+        } catch {
+            return false
+        }
     }
     
     /// Send notification message to user
-    public func push(title: String, subtitle: String?, message: String) {
-        if isAuthorized {
-            let content = UNMutableNotificationContent()
-            content.title = title
-            content.body = message
-            if let subtitle = subtitle {
-                content.subtitle = subtitle
-            }
-            
-            let request = UNNotificationRequest(
-                identifier: UUID().uuidString,
-                content: content,
-                trigger: nil
-            )
-            
-            await current.add(request)
+    public func push(title: String, subtitle: String?, message: String) async throws {
+        guard await getAuthorizationStatus() == .authorized else { return }
+        
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = message
+        if let subtitle = subtitle {
+            content.subtitle = subtitle
         }
+        
+        let request = UNNotificationRequest(
+            identifier: UUID().uuidString,
+            content: content,
+            trigger: nil
+        )
+        
+        try await current.add(request)
+    }
+    
+    public func getAuthorizationStatus() async -> UNAuthorizationStatus {
+        return await current.notificationSettings().authorizationStatus
     }
 }
