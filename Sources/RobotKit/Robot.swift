@@ -5,6 +5,8 @@
 //  Created by Leif on 8/27/22.
 //
 
+import AppKit
+
 /// `Robot` uses CoreGraphics to generate native mouse and keyboard input. It can also get information about the screen like the bounds, center, or even generating an image. `Robot` also can use [Vision](https://developer.apple.com/documentation/vision) to read text for an image.
 public actor Robot: SelfTasking {
     // MARK: - Singleton
@@ -32,6 +34,10 @@ public actor Robot: SelfTasking {
     
     /// Robot information using [Vision](https://developer.apple.com/documentation/vision)
     public let vision = RobotVision()
+    
+    /// Robot information of the NSApplication
+    @MainActor
+    public let application = NSApplication.shared
     
     private init() { }
 }
