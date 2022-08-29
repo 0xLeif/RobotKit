@@ -23,6 +23,7 @@
     - image: Create an image of the display for a certain CGRect
 - Vision: Robot information using [Vision](https://developer.apple.com/documentation/vision)
     - text: Use [Vision](https://developer.apple.com/documentation/vision) to request the text in the provided image
+- Application: Robot information of the NSApplication
 
 ## Basic Usage
 
