@@ -4,6 +4,9 @@ import XCTest
 final class RobotKitTests: XCTestCase {
     func testRobot() async throws {
         try await Robot.task { robot in
+            let isHidden = await robot.application.isHidden
+            XCTAssertFalse(isHidden)
+            
             // Find the center of the screen
             let mainScreenCenter: CGPoint = await robot.screen.center()
             
