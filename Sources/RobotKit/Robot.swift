@@ -35,6 +35,9 @@ public actor Robot: SelfTasking {
     /// Robot information using [Vision](https://developer.apple.com/documentation/vision)
     public let vision = RobotVision()
     
+    /// Robot control of notification center
+    public let notification = RobotNotification()
+    
     /// Robot information of the NSApplication
     @MainActor
     public let application = NSApplication.shared
