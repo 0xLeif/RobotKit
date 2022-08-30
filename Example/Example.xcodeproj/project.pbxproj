@@ -7,20 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		294E3EF928BDC34500C81AF9 /* RobotKit in Resources */ = {isa = PBXBuildFile; fileRef = 294E3EF828BDC34500C81AF9 /* RobotKit */; };
+		294E3EFB28BDC35A00C81AF9 /* RobotKit in Frameworks */ = {isa = PBXBuildFile; productRef = 294E3EFA28BDC35A00C81AF9 /* RobotKit */; };
 		29DF0B7E28BDB73800ACF693 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DF0B7D28BDB73800ACF693 /* ExampleApp.swift */; };
 		29DF0B8028BDB73800ACF693 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DF0B7F28BDB73800ACF693 /* ContentView.swift */; };
 		29DF0B8228BDB73900ACF693 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29DF0B8128BDB73900ACF693 /* Assets.xcassets */; };
 		29DF0B8528BDB73900ACF693 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29DF0B8428BDB73900ACF693 /* Preview Assets.xcassets */; };
-		29DF0B8E28BDB79D00ACF693 /* RobotKit in Frameworks */ = {isa = PBXBuildFile; productRef = 29DF0B8D28BDB79D00ACF693 /* RobotKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		294E3EF828BDC34500C81AF9 /* RobotKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = RobotKit; path = ..; sourceTree = "<group>"; };
 		29DF0B7A28BDB73800ACF693 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29DF0B7D28BDB73800ACF693 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		29DF0B7F28BDB73800ACF693 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		29DF0B8128BDB73900ACF693 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29DF0B8428BDB73900ACF693 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		29DF0B8628BDB73900ACF693 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
+		29DF0BAE28BDC21800ACF693 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,7 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29DF0B8E28BDB79D00ACF693 /* RobotKit in Frameworks */,
+				294E3EFB28BDC35A00C81AF9 /* RobotKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +41,7 @@
 		29DF0B7128BDB73800ACF693 = {
 			isa = PBXGroup;
 			children = (
+				294E3EF828BDC34500C81AF9 /* RobotKit */,
 				29DF0B7C28BDB73800ACF693 /* Example */,
 				29DF0B7B28BDB73800ACF693 /* Products */,
 				29DF0B8C28BDB79D00ACF693 /* Frameworks */,
@@ -75,6 +79,7 @@
 		29DF0B8C28BDB79D00ACF693 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				29DF0BAE28BDC21800ACF693 /* Package.swift */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -96,7 +101,7 @@
 			);
 			name = Example;
 			packageProductDependencies = (
-				29DF0B8D28BDB79D00ACF693 /* RobotKit */,
+				294E3EFA28BDC35A00C81AF9 /* RobotKit */,
 			);
 			productName = Example;
 			productReference = 29DF0B7A28BDB73800ACF693 /* Example.app */;
@@ -142,6 +147,7 @@
 			files = (
 				29DF0B8528BDB73900ACF693 /* Preview Assets.xcassets in Resources */,
 				29DF0B8228BDB73900ACF693 /* Assets.xcassets in Resources */,
+				294E3EF928BDC34500C81AF9 /* RobotKit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,7 +353,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		29DF0B8D28BDB79D00ACF693 /* RobotKit */ = {
+		294E3EFA28BDC35A00C81AF9 /* RobotKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RobotKit;
 		};
