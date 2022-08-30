@@ -5,6 +5,7 @@
 //  Created by Ahmed Shendy on 29/08/2022.
 //
 
+#if RELEASE
 import Foundation
 import UserNotifications
 
@@ -69,3 +70,4 @@ public actor RobotNotification: SelfTasking {
         return await current.notificationSettings().authorizationStatus
     }
 }
+#endif
