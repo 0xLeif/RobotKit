@@ -13,6 +13,16 @@ public actor RobotMouse: SelfTasking {
     private var mouseDisplayID: CGDirectDisplayID
     private var mouseLocation: CGPoint
     
+    private var globalEventMonitor: Any?
+    private var localEventMonitor: Any?
+    
+    /// Computed property to know if the RobotMouse is observing mouse movement
+    public var isObserving: Bool {
+        globalEventMonitor != nil && localEventMonitor != nil
+    }
+    
+    deinit { stopMonitor() }
+    
     init(
         initialMouseDisplayID: CGDirectDisplayID = CGMainDisplayID(),
         initialMouseLocation: CGPoint
@@ -21,17 +31,44 @@ public actor RobotMouse: SelfTasking {
         mouseLocation = initialMouseLocation
     }
     
-    public func observe() {
-        NSEvent.addLocalMonitorForEvents(
+    /// Start monitoring mouse movement events
+    public func startMonitor() {
+        globalEventMonitor = NSEvent.addGlobalMonitorForEvents(
             matching: [.mouseMoved],
             handler: { mouseMovementEvent in
                 self.mouseLocation = CGPoint(
                     x: mouseMovementEvent.locationInWindow.x,
                     y: mouseMovementEvent.locationInWindow.y
                 )
+                print(self.mouseLocation)
+            }
+        )
+        
+        localEventMonitor = NSEvent.addLocalMonitorForEvents(
+            matching: [.mouseMoved],
+            handler: { mouseMovementEvent in
+                self.mouseLocation = CGPoint(
+                    x: mouseMovementEvent.locationInWindow.x,
+                    y: mouseMovementEvent.locationInWindow.y
+                )
+                print(self.mouseLocation)
                 return mouseMovementEvent
             }
         )
+    }
+    
+    /// Stop monitoring mouse movement events
+    public func stopMonitor() {
+        if let localEventMonitor = localEventMonitor {
+            NSEvent.removeMonitor(localEventMonitor)
+        }
+        
+        if let globalEventMonitor = globalEventMonitor {
+            NSEvent.removeMonitor(globalEventMonitor)
+        }
+        
+        localEventMonitor = nil
+        globalEventMonitor = nil
     }
     
     /// Move the mouse to the display and point

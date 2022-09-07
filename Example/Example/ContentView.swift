@@ -23,7 +23,7 @@ struct ContentView: View {
             }
         }
         .task {
-            await Robot.default.mouse.observe()
+            await Robot.default.mouse.startMonitor()
         }
     }
 }
