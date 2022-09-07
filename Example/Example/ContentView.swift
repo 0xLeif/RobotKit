@@ -22,6 +22,9 @@ struct ContentView: View {
                 print("End")
             }
         }
+        .task {
+            await Robot.default.mouse.observe()
+        }
     }
 }
 

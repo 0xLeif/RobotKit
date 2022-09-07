@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AppKit
 
 /// Robot control of the mouse
 public actor RobotMouse: SelfTasking {
@@ -18,6 +19,19 @@ public actor RobotMouse: SelfTasking {
     ) {
         mouseDisplayID = initialMouseDisplayID
         mouseLocation = initialMouseLocation
+    }
+    
+    public func observe() {
+        NSEvent.addLocalMonitorForEvents(
+            matching: [.mouseMoved],
+            handler: { mouseMovementEvent in
+                self.mouseLocation = CGPoint(
+                    x: mouseMovementEvent.locationInWindow.x,
+                    y: mouseMovementEvent.locationInWindow.y
+                )
+                return mouseMovementEvent
+            }
+        )
     }
     
     /// Move the mouse to the display and point
