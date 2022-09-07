@@ -260,6 +260,11 @@ public struct RobotKeyboard: SelfTasking {
             case .F1: return .init(kVK_F1)
             }
         }
+        
+        /// CGEventSource keyState
+        public var isPressed: Bool {
+            CGEventSource.keyState(.combinedSessionState, key: code)
+        }
     }
 }
 
@@ -290,6 +295,11 @@ public extension RobotKeyboard {
     /// Type one or many Keys while holding shift
     func typeShifted(_ keys: Key...) {
         typeShifted(keys: keys)
+    }
+    
+    /// Check to see if the Key is currently being pressed down
+    func isPressed(_ key: Key) -> Bool {
+        key.isPressed
     }
     
     /// Press a key down until you call ``release(_:)``
