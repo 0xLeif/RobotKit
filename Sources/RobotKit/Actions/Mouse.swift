@@ -40,7 +40,6 @@ public actor RobotMouse: SelfTasking {
                     x: mouseMovementEvent.locationInWindow.x,
                     y: mouseMovementEvent.locationInWindow.y
                 )
-                print(self.mouseLocation)
             }
         )
         
@@ -51,7 +50,6 @@ public actor RobotMouse: SelfTasking {
                     x: mouseMovementEvent.locationInWindow.x,
                     y: mouseMovementEvent.locationInWindow.y
                 )
-                print(self.mouseLocation)
                 return mouseMovementEvent
             }
         )
