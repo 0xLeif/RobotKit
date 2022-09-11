@@ -15,7 +15,7 @@ struct ContentView: View {
                 await Robot.default.mouse.move(to: await Robot.default.screen.center())
                 
                 try await Robot.default.notification.task { notification in
-                    await notification.requestAuthorization()
+                    await notification.requestAuthorizationIfNeeded()
                     try await notification.push(title: "Hello", subtitle: "Example", message: "Message")
                 }
                 
