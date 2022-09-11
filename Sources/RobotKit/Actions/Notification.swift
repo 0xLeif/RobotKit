@@ -9,6 +9,8 @@ import UserNotifications
 
 /// Robot control of notification center and its delegate
 public actor RobotNotification: SelfTasking {
+    
+    /// Default private delegate for NotificationCenter
     private class DefaultNotificationCenterDelegate: NSObject, UNUserNotificationCenterDelegate {
         func userNotificationCenter(
             _ center: UNUserNotificationCenter,
@@ -27,6 +29,12 @@ public actor RobotNotification: SelfTasking {
             didReceive response: UNNotificationResponse,
             withCompletionHandler completionHandler: @escaping () -> Void
         ) { completionHandler() }
+    }
+    
+    private var isAuthorized: Bool {
+        get async {
+            await getAuthorizationStatus() == .authorized
+        }
     }
     
     private var current: UNUserNotificationCenter? {
@@ -55,11 +63,11 @@ public actor RobotNotification: SelfTasking {
     /// Request notification permission from user if needed
     @discardableResult
     public func requestAuthorizationIfNeeded(options: UNAuthorizationOptions = [.alert, .sound]) async -> Bool {
-        guard await getAuthorizationStatus() != .authorized else {
-            return await requestAuthorization(options: options)
+        if await isAuthorized {
+            return true
         }
         
-        return true
+        return await requestAuthorization(options: options)
     }
     
     /// Request notification permission from user
@@ -76,10 +84,7 @@ public actor RobotNotification: SelfTasking {
     
     /// Send notification message to user
     public func push(title: String, subtitle: String?, message: String) async throws {
-        guard
-            let current = current,
-            await getAuthorizationStatus() == .authorized
-        else { return }
+        guard let current = current, await isAuthorized else { return }
         
         let content = UNMutableNotificationContent()
         content.title = title
@@ -98,7 +103,8 @@ public actor RobotNotification: SelfTasking {
             try await current.add(request)
         }
     }
-    
+
+    /// Return current status for notification permission
     public func getAuthorizationStatus() async -> UNAuthorizationStatus {
         guard let current = current else { return .notDetermined }
 
