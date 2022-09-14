@@ -96,3 +96,7 @@ try await Robot.task { robot in
     await robot.mouse.rightClick()
 }
 ```
+
+## Acknowledge
+
+- [SwiftRobot](https://github.com/0xLeif/SwiftRobot): Declarative Layer for RobotKit
