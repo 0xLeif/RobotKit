@@ -69,10 +69,10 @@ public actor RobotMouse: SelfTasking {
         globalEventMonitor = nil
     }
     
-    /// Move the mouse to the display and point
-    public func move(
-        displayID: CGDirectDisplayID = CGMainDisplayID(),
-        to: CGPoint
+    /// Change the mouse location to a point for the display
+    public func setLocation(
+        to: CGPoint,
+        displayID: CGDirectDisplayID = CGMainDisplayID()
     ) {
         mouseDisplayID = displayID
         mouseLocation = to

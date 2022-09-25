@@ -11,7 +11,7 @@ final class RobotKitTests: XCTestCase {
             let mainScreenCenter: CGPoint = await robot.screen.center()
             
             // Move to the center of the screen and click the left mouse button
-            await robot.mouse.move(to: mainScreenCenter)
+            await robot.mouse.setLocation(to: mainScreenCenter)
             
             await robot.mouse.leftClick()
             

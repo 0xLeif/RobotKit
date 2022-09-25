@@ -60,6 +60,10 @@ public actor RobotNotification: SelfTasking {
     
     init() { }
     
+    public func set(delegate: UNUserNotificationCenterDelegate) {
+        self.delegate = delegate
+    }
+    
     /// Request notification permission from user if needed
     @discardableResult
     public func requestAuthorizationIfNeeded(options: UNAuthorizationOptions = [.alert, .sound]) async -> Bool {
