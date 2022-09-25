@@ -12,7 +12,7 @@ struct ContentView: View {
     var body: some View {
         Button("Push") {
             Task {
-                await Robot.default.mouse.move(to: await Robot.default.screen.center())
+                await Robot.default.mouse.setLocation(to: await Robot.default.screen.center())
                 
                 try await Robot.default.notification.task { notification in
                     await notification.requestAuthorizationIfNeeded()
